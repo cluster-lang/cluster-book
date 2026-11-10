@@ -120,5 +120,25 @@ description: "Learn Cluster-lang from the ground up. A high-performance systems 
         <div class="card-num">Chapter 27</div>
         <div class="card-title">Static Binary File Patching & Rewriting</div>
     </a>
+    <a class="chapter-card" href="{{ '/chapter28/' | relative_url }}">
+        <div class="card-num">Chapter 28</div>
+        <div class="card-title">Ultra-Token-Efficient Developer Ergonomics</div>
+    </a>
+    <a class="chapter-card" href="{{ '/chapter29/' | relative_url }}">
+        <div class="card-num">Chapter 29</div>
+        <div class="card-title">Systems Memory Freedom & Raw Pointers</div>
+    </a>
+    <a class="chapter-card" href="{{ '/chapter30/' | relative_url }}">
+        <div class="card-num">Chapter 30</div>
+        <div class="card-title">Zero-Glue C/C++ Interoperability & Native Math</div>
+    </a>
+    <a class="chapter-card" href="{{ '/chapter31/' | relative_url }}">
+        <div class="card-num">Chapter 31</div>
+        <div class="card-title">Native Multi-Dimensional Tensors & SIMD Matrix Math</div>
+    </a>
+    <a class="chapter-card" href="{{ '/chapter32/' | relative_url }}">
+        <div class="card-num">Chapter 32</div>
+        <div class="card-title">Zero-Training AI Model Weight Surgery (SafeTensors & GGUF)</div>
+    </a>
 </div>
 

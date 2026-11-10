@@ -4,6 +4,8 @@ title: "Chapter 27: Static Binary File Patching & Rewriting"
 permalink: /chapter27/
 prev_chapter: /chapter26/
 prev_title: "Chapter 26"
+next_chapter: /chapter28/
+next_title: "Chapter 28"
 ---
 
 # Chapter 27: Static Binary File Patching & Rewriting
