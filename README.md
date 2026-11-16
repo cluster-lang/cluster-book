@@ -18,6 +18,9 @@ Cluster is a high-performance compiled systems programming language combining Py
 
 The book covers everything from fundamental syntax to deep compiler internals and standard libraries:
 
+### Part 0: The Vision & Manifesto
+- **Chapter 0: The Cluster Manifesto** — Why build Cluster? The dependency horror crisis (99% dead code bloat), breaking the legacy "don't touch running code" dogma, expressive density proof, and the all-in-one vision.
+
 ### Part I: Core Language & Control Flow
 - **Chapter 1: The Basics** — Primitive data types (`int`, `float`, `string`, `bool`), type inference (`:=`), mutability (`let mut`), arithmetic, and comments.
 - **Chapter 2: Control Flow & Functions** — `if`/`elif`/`else`, `while` loops, function signatures (`fn name(param: type) -> ret:`), and recursion.

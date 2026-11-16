@@ -12,6 +12,10 @@ description: "Learn Cluster-lang from the ground up. A high-performance systems 
 <h2>Chapters</h2>
 
 <div class="chapter-grid">
+    <a class="chapter-card" href="{{ '/chapter0/' | relative_url }}" style="border-color: #6366f1;">
+        <div class="card-num" style="color: #818cf8;">Chapter 0</div>
+        <div class="card-title">The Cluster Manifesto: The Dependency Horror & All-in-One Vision</div>
+    </a>
     <a class="chapter-card" href="{{ '/chapter1/' | relative_url }}">
         <div class="card-num">Chapter 1</div>
         <div class="card-title">The Basics</div>
