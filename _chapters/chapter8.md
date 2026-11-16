@@ -1,66 +1,177 @@
 ---
 layout: chapter
-title: "Cluster-lang: Chapter 8 — Tensor Math & Hardware Peripherals"
+title: "Cluster-lang: Chapter 8 — Tensor Math & SIMD Acceleration"
 permalink: /chapter8/
 prev_chapter: /chapter7/
-prev_title: "Chapter 7"
+prev_title: "Chapter 7 — Database & Table Queries"
 next_chapter: /chapter9/
-next_title: "Chapter 9"
+next_title: "Chapter 9 — AI-First Compiler Features & Native Model Execution"
 ---
 
-# Cluster-lang: Chapter 8 — Tensor Math & Hardware Peripherals
+# Chapter 8: Tensor Math & SIMD Acceleration — Bare-Metal Linear Algebra & Hardware Control
 
-This chapter covers Cluster-lang's native capabilities for fast multidimensional tensor computations (AI/ML) and direct bare-metal hardware controls.
+Artificial Intelligence, transformer inference, computer vision, and scientific simulations depend on high-throughput linear algebra. Traditionally, developers were forced to rely on heavy C++ frameworks (like PyTorch, TensorFlow, or NumPy) wrapped in Python, incurring massive serialization overhead and memory duplication.
+
+**Cluster integrates Tensor math directly into the runtime:**  
+Native 2D and N-dimensional tensors (`zk_tensor`), hardware SIMD vectorization (AVX-512, AVX2 on x86-64, NEON on ARM64), built-in transformer activations (`GELU`, `ReLU`, `Softmax`), and zero-overhead embedded hardware peripheral controls.
 
 ---
 
-## 1. Tensor Mathematics (`Tensor`)
+## 1. Native Tensor Lifecycle & Creation
 
-Cluster-lang provides built-in, highly optimized multidimensional arrays (`Tensor`) designed for AI pipelines, machine learning, and high-performance scientific simulations.
+Cluster tensors are contiguous blocks of 64-bit IEEE double-precision floats allocated to CPU cache-line boundaries:
 
-### Creating Tensors
-Declare a tensor by specifying its shape and dimensions:
-```python
-// Creates a 2x3 tensor initialized to 0.0
-t1 := Tensor(shape=[2, 3])
+```cluster
+// Create a 4x4 matrix initialized with zeros
+t_zeros := tensor_zeros(4, 4)
+
+// Create a 2x3 matrix filled with ones
+t_ones := tensor_ones(2, 3)
+
+// Create a tensor filled with a specific scalar value
+t_fill := tensor_fill(3, 3, 0.75)
+
+// Random initialization for neural network weights (min, max)
+weights := tensor_random(128, 64, -0.05, 0.05)
 ```
 
-### Basic Math Operations
-Tensors support fast matrix addition, scalar multiplication, and dot products:
-```python
-t1 := Tensor(shape=[2, 2])
-t1.set(row=0, col=0, val=1.0)
-t1.set(row=0, col=1, val=2.0)
+### Element Access & Dimension Queries
+```cluster
+// Read rows and columns
+r := tensor_rows(weights)           // 128
+c := tensor_cols(weights)           // 64
+total := tensor_size(weights)       // 8192 elements
 
-t2 := Tensor(shape=[2, 2])
-t2.set(row=0, col=0, val=3.0)
-t2.set(row=0, col=1, val=4.0)
-
-// Fast matrix multiplication (dot product)
-t3 := t1.matmul(t2)
+// 0-indexed element access and mutation (O(1))
+val := tensor_get(weights, 0, 0)
+tensor_set(weights, 0, 0, 0.125)
 ```
 
 ---
 
-## 2. Embedded Systems & Hardware Controls
+## 2. High-Speed SIMD Matrix Multiplication (`matmul`)
 
-Cluster-lang compiles directly to native machine code without virtual machines or heavy runtime baggage, making it exceptionally suited for microcontrollers (Arduino, STM32, ESP32) and single-board computers (Raspberry Pi).
+Matrix multiplication is the workhorse of deep learning. Cluster's `tensor_matmul` uses cache-tiled loops optimized for hardware SIMD vector units:
 
-### Native GPIO Controls
-Cluster-lang standard library provides native commands for digital pin configuration and operations:
-*   `pinMode(pin, mode)`: Sets a GPIO pin as `0` (INPUT) or `1` (OUTPUT).
-*   `digitalWrite(pin, state)`: Writes `0` (LOW) or `1` (HIGH) to a pin.
-*   `delay(ms)`: Pauses execution for a specified duration in milliseconds.
+```cluster
+// A is 512x256, B is 256x128
+A := tensor_random(512, 256, -1.0, 1.0)
+B := tensor_random(256, 128, -1.0, 1.0)
 
-```python
+// Result C is 512x128
+C := tensor_matmul(A, B)
+
+println("Matrix multiplication completed. Result shape: " + 
+        str(tensor_rows(C)) + "x" + str(tensor_cols(C)))
+```
+
+### Vector Dot Products & L2 Norms
+```cluster
+v1 := tensor_fill(1, 1024, 0.5)
+v2 := tensor_fill(1, 1024, 2.0)
+
+// Hardware-accelerated dot product
+dot_prod := tensor_dot(v1, v2)      // 1024.0
+
+// L2 Euclidean norm
+magnitude := tensor_norm(v1)
+```
+
+---
+
+## 3. Built-In Deep Learning Activation Functions
+
+Cluster includes native implementations of key deep learning activation functions, compiled directly to vector math instructions:
+
+### 1. GELU (Gaussian Error Linear Unit)
+Used in state-of-the-art Transformer LLMs (BERT, GPT, Llama):
+```cluster
+hidden_states := tensor_random(64, 768, -2.0, 2.0)
+activated := tensor_gelu(hidden_states)
+```
+
+### 2. ReLU (Rectified Linear Unit)
+Standard activation for convolutional neural networks and feed-forward layers:
+```cluster
+relu_out := tensor_relu(hidden_states)
+```
+
+### 3. Softmax
+Computes numerically stable probability distributions over attention logits:
+```cluster
+logits := tensor_random(1, 32000, -5.0, 5.0)
+probabilities := tensor_softmax(logits)
+```
+
+---
+
+## 4. Element-Wise Tensor Arithmetic
+
+Tensors support broadcasting and element-wise matrix arithmetic:
+
+```cluster
+t1 := tensor_fill(4, 4, 10.0)
+t2 := tensor_fill(4, 4, 2.5)
+
+// Element-wise addition, subtraction, and multiplication
+sum_t  := tensor_add(t1, t2)        // Each element = 12.5
+diff_t := tensor_sub(t1, t2)        // Each element = 7.5
+prod_t := tensor_mul(t1, t2)        // Each element = 25.0
+
+// Scalar scaling
+scaled := tensor_scale(t1, 0.5)     // Each element = 5.0
+
+// Matrix transposition
+transposed := tensor_transpose(A)
+```
+
+---
+
+## 5. Embedded Systems & Hardware Peripheral Control
+
+Because Cluster compiles directly to bare-metal machine code with **zero runtime overhead and no garbage collection**, it is uniquely qualified to run directly on microcontrollers (ARM Cortex-M, ESP32, RISC-V) and single-board computers (Raspberry Pi):
+
+### Direct Digital GPIO Control
+```cluster
 fn main():
-    put "Initializing LED Pin..."
-    pinMode(18, 1)            // Set GPIO Pin 18 to OUTPUT mode
+    println("Initializing hardware bus...")
+    pinMode(18, 1)                  // Configure Pin 18 as OUTPUT (1)
     
-    while True:
-        digitalWrite(18, 1)   // LED ON
-        delay(500)            // Wait 500ms
-        digitalWrite(18, 0)   // LED OFF
-        delay(500)            // Wait 500ms
+    let mut i: int = 0
+    while i < 10:
+        digitalWrite(18, 1)         // Set HIGH (3.3V)
+        delay(200)                  // Sleep 200 milliseconds
+        digitalWrite(18, 0)         // Set LOW (0V)
+        delay(200)
+        i = i + 1
 ```
-When compiling for microcontrollers (using `--target esp32` or `--target arduino`), the compiler automatically bundles the required hardware cross-compilation header libraries.
+
+### Supported Hardware Buses in Standard Library:
+- **GPIO:** High-speed digital read/write and interrupt handlers.
+- **I2C:** Inter-Integrated Circuit master/slave bus for sensors (accelerometers, gyroscopes, displays).
+- **SPI:** Serial Peripheral Interface for high-speed flash memory and OLED displays.
+- **UART:** Serial telemetry and modem communications.
+
+---
+
+## 6. Architectural Advantages: Scientific Computing Across Languages
+
+| Metric | Python (NumPy / PyTorch) | C++ (Eigen / BLAS) | Rust (ndarray) | Cluster (`zk_tensor`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Runtime Overhead** | High (CPython wrapper) | Low | Low | **⚡ Zero Overhead (Native LLVM)** |
+| **SIMD Vectorization** | Delegated to C library | Complex templates | External crates | **⚡ Built-in AVX / NEON intrinsics** |
+| **Activations (GELU/Softmax)** | Requires PyTorch | Requires third-party library | Requires crates | **✅ Built-in Native Primitives** |
+| **Embedded Portability** | ❌ Cannot run on microcontrollers | Complex toolchains | Embedded Rust setup | **✅ Native cross-compilation** |
+| **External Dependencies** | ❌ 500MB+ virtualenv | ❌ CMake, MKL, BLAS | ❌ 20+ crates | **✅ 100% Dependency-Free** |
+
+---
+
+## 7. Summary
+
+In this chapter, you learned:
+- How to create and manage contiguous multidimensional tensors.
+- How to execute cache-optimized, SIMD-accelerated matrix multiplication (`matmul`).
+- How to use built-in neural network activations (`GELU`, `ReLU`, `Softmax`).
+- How to perform direct GPIO pin manipulation on embedded microcontrollers.
+
+In the next chapter, we explore **Native AI Models & Inference Execution** to see how Cluster loads and executes multi-billion parameter models directly from disk.

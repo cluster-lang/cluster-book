@@ -14,7 +14,7 @@ Cluster is a high-performance compiled systems programming language combining Py
 
 ---
 
-## 📖 Chapter Roadmap (32 Chapters)
+## 📖 Chapter Roadmap (36 Chapters)
 
 The book covers everything from fundamental syntax to deep compiler internals and standard libraries:
 
@@ -29,17 +29,23 @@ The book covers everything from fundamental syntax to deep compiler internals an
 
 ### Part II: Concurrency, Asynchrony & Systems Programming
 - **Chapter 5: Concurrency & Channels** — Lightweight thread spawning (`spawn task()`), channels (`channel[int]`), message passing, and thread synchronization.
-- **Chapter 6: Async Programming & Metaprogramming** — Event loops, non-blocking I/O, compile-time macros, and syntax tree inspections.
-- **Chapter 7: Database & Table Queries** — Native SQL/table data types, in-memory caching, indexing, and persistent key-value storage.
-- **Chapter 8: Tensor Math & Hardware Peripherals** — SIMD vectors, matrix transformations, hardware buses (GPIO, I2C, SPI), and audio/video streaming.
+- **Chapter 6: Enums, Pattern Matching & Metaprogramming** — Tagged unions (`enum`), exhaustive `match`, C FFI (`extern fn`, `link`), and inline C++ escape hatches (`cpp_inject`).
+- **Chapter 7: Database & Table Queries** — Integrated `DB` engine, wire protocols (`cl-postgres`, `cl-redis`), and pure Cluster storage engines.
+- **Chapter 8: Tensor Math & SIMD Acceleration** — Native multidimensional `Tensor`, vectorized matrix multiplication (`matmul`, `@`), neural network activations (GELU, Softmax).
 
-### Part III: AI-First Architecture & Compiler Internals
-- **Chapter 9: AI-First Compiler Features** — Self-documenting syntax models, tokenizer bridges, and vector embeddings.
-- **Chapter 10: Custom Frontend & Backend File Extensions** — The `.cl` source file format, `.cld` documentation trees, and `.clb` binary bytecode bundles.
-- **Chapter 11: Modular Web Development & High-Speed SSR** — Server-side rendering, component islands, and zero-JS templates.
-- **Chapter 12-16: Advanced System Architecture** — Filesystem APIs, native networking, POSIX socket bindings, and binary serialization.
-- **Chapter 17-24: Standard Modules & Algorithms** — Graph theory, dynamic programming, cryptographic primitives, and hashing algorithms.
-- **Chapter 25-32: Production Deployment & Tooling** — LLVM compilation flags, cross-compilation (x86-64, ARM64), debugging, and package distribution.
+### Part III: AI-First Architecture & Tooling
+- **Chapter 9: AI-First Compiler Features & Native Model Execution** — Zero-copy model loading, SafeTensors/GGUF/CLM formats, memory-mapped weights, and structured `--json-errors` for AI agents.
+- **Chapter 10: Custom Frontend & Backend File Extensions** — The unified domain extensions (`.cl`, `.cld`, `.clb`, `.cls`, `.clw`, `.clcfg`).
+- **Chapter 11: Modular Web Development & High-Speed SSR** — Server-side rendering, component templates, and sub-microsecond HTML assembly.
+- **Chapter 12-16: Machine Adaptability & Advanced Tooling** — Cross-hardware flexibility, vector space mapping (`.clv`), Jekyll hybrid bridge, and compiler secrecy.
+- **Chapter 17-24: AI Training, Traits, Assembly & Sandboxing** — High-performance tensor training, C++20 concept traits, inline assembly (`asm`), allocators, web stacks, channel select, and Cluster Containers (`.clc`).
+- **Chapter 25-32: Systems Mastery, Low-Level Freedom & AI Surgery** — Bootstrapping Cluster OS, dynamic hot-patching, binary byte rewriting, token-efficient ergonomics, raw pointers (`unsafe:`), zero-glue C/C++ interop, and AI model weight surgery.
+
+### Part IV: Hardware Targets, Standard Wire Formats & Reliability
+- **Chapter 33: Multi-Target Cross-Compilation & Hardware Backends** — `cl targets` hardware matrix, WebAssembly (`wasm32-wasi`), bare-metal microcontrollers (`arm-none-eabi`), and ThreadSanitizer (`--tsan`).
+- **Chapter 34: Standard Document, Data & Physics Wire Formats** — The unified wire modules: Document AST (`std/cld`), binary bundles (`std/clb`), schema contracts (`std/cls`), and 3D spatial voxel physics (`std/clw`).
+- **Chapter 35: Pure Cryptography, Hashing & Wire Security** — RFC 3174 SHA-1, FNV-1a, DJB2, and RFC 4648 Base64 streaming implemented in 100% pure Cluster with zero external C libraries.
+- **Chapter 36: Error Handling, Result Monads & Robust Panics** — Algebraic `Result[T, E]`, syntactic fallback operators (`?:`, `??`, `??=`, `?.`), and fail-closed assertion contracts.
 
 ---
 

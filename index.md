@@ -144,5 +144,21 @@ description: "Learn Cluster-lang from the ground up. A high-performance systems 
         <div class="card-num">Chapter 32</div>
         <div class="card-title">Zero-Training AI Model Weight Surgery (SafeTensors & GGUF)</div>
     </a>
+    <a class="chapter-card" href="{{ '/chapter33/' | relative_url }}">
+        <div class="card-num">Chapter 33</div>
+        <div class="card-title">Multi-Target Cross-Compilation & Hardware Backends</div>
+    </a>
+    <a class="chapter-card" href="{{ '/chapter34/' | relative_url }}">
+        <div class="card-num">Chapter 34</div>
+        <div class="card-title">Standard Document, Data & Physics Wire Formats</div>
+    </a>
+    <a class="chapter-card" href="{{ '/chapter35/' | relative_url }}">
+        <div class="card-num">Chapter 35</div>
+        <div class="card-title">Pure Cryptography, Hashing & Wire Security</div>
+    </a>
+    <a class="chapter-card" href="{{ '/chapter36/' | relative_url }}">
+        <div class="card-num">Chapter 36</div>
+        <div class="card-title">Error Handling, Result Monads & Robust Panics</div>
+    </a>
 </div>
 

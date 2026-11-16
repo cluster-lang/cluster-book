@@ -4,6 +4,8 @@ title: "Chapter 32: Zero-Training AI Model Weight Surgery (SafeTensors & GGUF)"
 permalink: /chapter32/
 prev_chapter: /chapter31/
 prev_title: "Chapter 31"
+next_chapter: /chapter33/
+next_title: "Chapter 33"
 ---
 
 # Chapter 32: Zero-Training AI Model Weight Surgery (SafeTensors & GGUF)

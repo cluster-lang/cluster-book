@@ -9,7 +9,7 @@ next_title: "Chapter 1 — The Basics"
 # Chapter 0: The Cluster Manifesto — The Dependency Horror & The All-in-One Vision
 
 > *"Modern software engineering has traded craftsmanship for dependency sprawl. We build skyscrapers on foundations of digital sand. Cluster exists to break this cycle."*  
-> — **mohammadzaid/(cluster)**, Creator of Cluster
+> — **mohammadzaid**, Creator of Cluster
 
 ---
 
