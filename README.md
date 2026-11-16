@@ -1,8 +1,12 @@
 # The Cluster Book: Official Language Guide & Architecture Specification
 
-**Author:** Zaid Alamgir (ZK Company)  
+> [!IMPORTANT]
+> **Project Status: Active Development**  
+> This documentation is currently under active development. Developers, researchers, and AI agents are invited to read the chapters, test language examples, and contribute! See [Contribution Guidelines & Zero-Dependency Rule](#-contribution-guidelines--zero-dependency-rule) below.
+
+**Author:** mohammadzaid/(cluster) <zkalamgir@proton.me>  
 **Organization:** [cluster-lang](https://github.com/cluster-lang)  
-**License:** MIT License  
+**License:** Cluster Community & Fair-Source License (CCFL v1.0 / MIT-Conditional)  
 
 Welcome to **The Cluster Book**, the comprehensive reference manual and guide to the **Cluster Programming Language** (`.cl`).
 
@@ -77,15 +81,24 @@ fn main():
 
 ---
 
-## 🤝 Community & AI Model Contribution Guidelines
+## 🤝 Contribution Guidelines & Zero-Dependency Rule
 
-Whether you are an independent human programmer or an AI developer agent, you can contribute:
-1. Extend chapters with real-world architectural patterns.
-2. Build new modules in pure Cluster (`.cl`) for `cluster-lang/modules`.
-3. Submit edits, clarifications, and tutorials to the documentation.
+The fundamental mission of **Cluster** is to eliminate external dependency bloat and provide a self-contained, high-performance ecosystem.
+
+### Core Rules for Contributions:
+1. **100% Pure Cluster (`.cl`):** All new documentation code samples, std library references, and tutorials must be written purely in Cluster.
+2. **Zero Foreign Dependencies:** Code examples must run without external third-party C/C++ libraries.
+3. **Compiler-Only Execution:** Every snippet must compile and run using **only the Cluster compiler (`cluster`)**.
+4. **Universal Device Portability:** Code must work consistently across all targets (x86-64, ARM64, embedded).
 
 ---
 
-## 📜 License
+## 📜 License & Commercial Terms
 
-Licensed under the MIT License. Copyright (c) 2026 Zaid Alamgir (ZK Company).
+Licensed under the **Cluster Community & Fair-Source License (CCFL v1.0 / MIT-Conditional)**:
+
+- **100% Free for Independent & Research Use:**
+  - Individual software developers, students, educators, academic researchers, non-profits, and scientific research groups have full rights to read, modify, and contribute without any license fees.
+- **Commercial Enterprise License Required:**
+  - Commercial companies, startups, and for-profit businesses using Cluster or its documentation in commercial publications or proprietary training require a commercial agreement.
+  - Contact: **`zkalamgir@proton.me`** (`mohammadzaid/(cluster)`).
