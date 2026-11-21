@@ -1,40 +1,46 @@
-Cluster Community & Fair-Source License (CCFL v1.0 / MIT-Conditional)
+Cluster Community & Fair-Source License (CCFL v2.0 / Strict-Distribution)
 
-Copyright (c) 2026 mohammadzaid/(cluster) <zkalamgir@proton.me>
+Copyright (c) 2026 Mohammad Zaid (zk-mohammad) / Cluster Organization
+Official Repository: https://github.com/cluster-lang/cluster-book
+Author Account: https://github.com/zk-mohammad
 All rights reserved.
 
-1. PERMITTED INDEPENDENT & RESEARCH USE:
+1. PERMITTED INDEPENDENT, ACADEMIC & RESEARCH USE:
 Permission is hereby granted, free of charge, to any individual developer,
-freelance engineer, student, educator, academic researcher, non-profit
-organization, or scientific research group to obtain a copy of this software
-and associated documentation files (the "Software"), to deal in the Software
-without restriction, including without limitation the rights to use, copy,
-modify, merge, publish, distribute, and compile the Software, subject to the
-following conditions:
+student, educator, academic researcher, non-profit organization, or community
+reader to read, study, download, and reference this documentation ("the Documentation"),
+and to use the code examples contained herein for learning, research, and
+development, subject to the conditions stated in this License.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. CONTENT INTEGRITY, ANTI-TAMPERING & CANONICAL DISTRIBUTION:
+The official Cluster Book, architectural specifications, language syntax guides,
+and associated documentation belong exclusively to Mohammad Zaid (GitHub: zk-mohammad)
+and the official Cluster Organization (https://github.com/cluster-lang).
 
-2. COMMERCIAL USE RESTRICTIONS:
-Any use of the Software, its compiler, runtime components, standard library,
-or compiled output by for-profit commercial entities, companies, corporate
-enterprises, or startups for revenue-generating operations, commercial products,
-proprietary closed-source services, or SaaS offerings requires a valid commercial
-license from the copyright holder.
+To maintain technical accuracy, documentation integrity, and prevent malicious
+misinformation or modified copies:
+- Unauthorized duplication, modification, distorted re-publication, or rogue
+  mirroring of the documentation is STRICTLY PROHIBITED.
+- Exactly ONE canonical, authoritative source of truth exists, published under
+  https://github.com/cluster-lang/cluster-book.
+- All modified forks, unauthorized mirrors, or duplicate distributions claiming
+  official authority are strictly INVALID and unauthorized.
 
-To request a commercial license, contact: zkalamgir@proton.me
+3. COMMERCIAL RE-PUBLICATION RESTRICTIONS:
+Any commercial publishing, printing, monetization, paid course packaging, or
+closed-access distribution of this book or substantial portions thereof requires
+prior written authorization and an explicit commercial license from the author.
 
-3. CONTRIBUTIONS & ZERO-DEPENDENCY GUARANTEE:
-All contributions to this repository are welcomed under these license terms.
-All contributed modules, standard libraries, and tools must be written in
-100% pure Cluster without external C/C++ third-party library dependencies,
-ensuring standalone portability across x86-64, ARM, and embedded systems.
+Licensing inquiries: zkalamgir@proton.me
 
-4. WARRANTY DISCLAIMER:
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+4. CONTRIBUTIONS & ZERO-DEPENDENCY GUARANTEE:
+All contributions to this repository, tutorial examples, and documentation assets
+must be written in 100% pure Cluster code without external third-party dependencies,
+ensuring accuracy and compatibility across all official Cluster compiler targets.
+
+5. WARRANTY DISCLAIMER:
+THE DOCUMENTATION AND CODE SAMPLES ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY ARISING FROM THE USE OF THIS DOCUMENTATION.

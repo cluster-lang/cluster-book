@@ -1,4 +1,4 @@
-name: Deploy Cluster-Jekyll Book to GitHub Pages
+name: Deploy Cluster Book to GitHub Pages
 
 on:
   push:
@@ -9,7 +9,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  packages: read
 
 concurrency:
   group: "pages"
@@ -22,19 +21,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Website Source
+      - name: Checkout Source
         uses: actions/checkout@v4
 
-      - name: Build Site with Cluster-Jekyll Action
-        uses: cl-andro/cluster-lang-release@main
-
-      - name: Ensure .nojekyll bypass file exists
-        run: touch _site/.nojekyll
+      - name: Build Book with Native Cluster SSG
+        run: |
+          chmod +x bin/cluster-ssg
+          ./bin/cluster-ssg
+          touch dist/.nojekyll
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
+          path: 'dist'
 
       - name: Deploy to GitHub Pages
         id: deployment

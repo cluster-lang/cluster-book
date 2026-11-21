@@ -1,7 +1,18 @@
+# ==============================================================================
+# Cluster Book: Git Ignore
+# ==============================================================================
+
+# Build outputs
 _site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-vendor/
-.bundle/
+dist/
+
+# Cache and IDE artifacts
 .cl_cache/
+.vscode/
+.bundle/
+vendor/
+
+# System and temporary files
+*.tmp
+*.log
+.DS_Store
