@@ -28,6 +28,11 @@ jobs:
         run: |
           chmod +x bin/cluster-ssg
           ./bin/cluster-ssg
+          sed -i 's|href="/chapter|href="chapter|g' dist/*.html dist/tags/*.html 2>/dev/null || true
+          sed -i 's|href="/index.html|href="index.html|g' dist/*.html dist/tags/*.html 2>/dev/null || true
+          sed -i 's|href="/static/|href="static/|g' dist/*.html dist/tags/*.html 2>/dev/null || true
+          sed -i 's|src="/static/|src="static/|g' dist/*.html dist/tags/*.html 2>/dev/null || true
+          sed -i 's|url="/chapter|url="chapter|g' dist/search-index.json dist/api/*.json 2>/dev/null || true
           touch dist/.nojekyll
 
       - name: Upload Pages Artifact
