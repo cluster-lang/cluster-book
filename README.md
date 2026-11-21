@@ -107,7 +107,7 @@ The fundamental mission of **Cluster** is to eliminate external dependency bloat
 Licensed under the **Cluster Community & Fair-Source License (CCFL v1.0 / MIT-Conditional)**:
 
 - **100% Free for Independent & Research Use:**
-  - Individual software developers, students, educators, academic researchers, non-profits, and scientific research groups have full rights to read, modify, and contribute without any license fees.
+  - Individual software developers, students, educators, academic researchers, non-profits, and scientific research groups have full rights to read, study, and reference without any license fees (any modification, alteration, or redistribution strictly requires prior written permission, including for research).
 - **Commercial Enterprise License Required:**
   - Commercial companies, startups, and for-profit businesses using Cluster or its documentation in commercial publications or proprietary training require a commercial agreement.
   - Contact: **`zkalamgir@proton.me`** (`mohammadzaid/(cluster)`).

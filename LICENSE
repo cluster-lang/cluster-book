@@ -11,6 +11,10 @@ student, educator, academic researcher, non-profit organization, or community
 reader to read, study, download, and reference this documentation ("the Documentation"),
 and to use the code examples contained herein for learning, research, and
 development, subject to the conditions stated in this License.
+Any modification, alteration, patching, decompilation, or derivative compilation
+of the Software (including for academic, educational, or research purposes) strictly
+requires prior written permission and explicit authorization from the copyright holder.
+
 
 2. CONTENT INTEGRITY, ANTI-TAMPERING & CANONICAL DISTRIBUTION:
 The official Cluster Book, architectural specifications, language syntax guides,
