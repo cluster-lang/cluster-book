@@ -111,3 +111,6 @@ Licensed under the **Cluster Community & Fair-Source License (CCFL v1.0 / MIT-Co
 - **Commercial Enterprise License Required:**
   - Commercial companies, startups, and for-profit businesses using Cluster or its documentation in commercial publications or proprietary training require a commercial agreement.
   - Contact: **`zkalamgir@proton.me`** (`mohammadzaid/(cluster)`).
+
+
+  
