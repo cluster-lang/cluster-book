@@ -1,0 +1,16 @@
+title: Chapter 34: Standard Document, Data & Physics Wire Formats
+author: zk-mohammad <ZaidKhan-alamgir@proton.me>
+date: 2026-11-24
+layout: chapter
+tags: cluster,cld,clb,cls,clw,formats
+===
+
+# Chapter 34: Standard Document, Data & Physics Wire Formats
+
+Cluster features unified, zero-dependency domain file formats engineered for high-density systems and AI applications:
+- **`.cld` (Cluster Document)**: Markdown and document AST format (`std/cld.cl`)
+- **`.clb` (Cluster Binary Bundle)**: Zero-overhead binary package archive (`std/clb.cl`)
+- **`.cls` (Cluster Schema)**: Type contract and interface schema validation (`std/cls.cl`)
+- **`.clw` (Cluster World)**: 3D spatial voxel physics and world state (`std/clw.cl`)
+
+These standards allow writing games, static sites, database layers, and distributed networking tools purely in Cluster without external protocol libraries.

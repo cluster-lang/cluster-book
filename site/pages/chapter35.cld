@@ -1,0 +1,29 @@
+title: Chapter 35: Pure Cryptography, Hashing & Wire Security
+author: zk-mohammad <ZaidKhan-alamgir@proton.me>
+date: 2026-11-24
+layout: chapter
+tags: cluster,crypto,sha1,security
+===
+
+# Chapter 35: Pure Cryptography, Hashing & Wire Security
+
+Cluster standard library provides pure, verified cryptographic algorithms implemented entirely in Cluster without linking to OpenSSL or external C libraries (`std/crypto.cl`):
+
+## 1. Supported Cryptographic Primitives
+- **RFC 3174 SHA-1**: 160-bit secure hashing algorithm.
+- **FNV-1a & DJB2**: High-speed hash table hashing routines.
+- **RFC 4648 Base64**: Constant-memory streaming encoder and decoder.
+
+## 2. Example Usage
+
+```cluster
+import "std/crypto.cl"
+
+fn main():
+    data := "Cluster Secure Payload"
+    hash := sha1(data)
+    encoded := base64_encode(data)
+
+    println("Payload SHA-1: " + hash)
+    println("Base64:        " + encoded)
+```

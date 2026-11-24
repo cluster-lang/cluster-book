@@ -1,0 +1,39 @@
+title: Chapter 33: Multi-Target Cross-Compilation & Hardware Backends
+author: zk-mohammad <ZaidKhan-alamgir@proton.me>
+date: 2026-11-24
+layout: chapter
+tags: cluster,cross-compilation,llvm,targets
+===
+
+# Chapter 33: Multi-Target Cross-Compilation & Hardware Backends
+
+Cluster compiles directly to native standalone machine code across a matrix of 10 primary targets without requiring separate cross-compiler toolchains installed.
+
+## 1. Supported Targets Matrix
+
+View the complete target matrix:
+```bash
+cl targets
+```
+
+Supported triples:
+- `x86_64-linux-gnu`: Tier 1 Native Host Linux (ELF 64-bit)
+- `aarch64-linux-gnu`: Tier 2 ARM64 Linux (AWS Graviton, Raspberry Pi)
+- `arm64-apple-darwin`: Tier 2 Apple Silicon macOS (M1/M2/M3/M4)
+- `x86_64-apple-darwin`: Tier 2 Intel macOS
+- `x86_64-pc-windows-msvc`: Tier 1 Windows PE/COFF Native
+- `wasm32-wasi`: Tier 1 Standalone WebAssembly (Cloudflare Workers, Fastly)
+- `wasm32-unknown-unknown`: Tier 2 In-Browser WebAssembly
+- `riscv64-linux-gnu`: Tier 2 RISC-V 64-bit hardware
+- `arm-none-eabi`: Tier 2 Bare-metal embedded microcontrollers (Cortex-M)
+
+## 2. Cross-Compiling
+
+Compile directly by specifying the `--target` flag:
+```bash
+# Compile to WebAssembly
+cl build src/main.cl --target wasm32-wasi -o app.wasm
+
+# Maximum release optimizations with Link-Time Optimization and stripping
+cl build src/main.cl -O3 --lto --strip -o app
+```

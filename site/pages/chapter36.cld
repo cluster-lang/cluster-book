@@ -1,0 +1,136 @@
+title: Chapter 36: Ecosystem Tooling, 550K Module Registry, REPL, LSP & Playground
+author: zk-mohammad <ZaidKhan-alamgir@proton.me>
+date: 2026-11-24
+layout: chapter
+tags: cluster,tooling,repl,lsp,packages,ci
+===
+
+# Chapter 36: Ecosystem Tooling, 550K Module Registry, REPL, LSP & Playground
+
+Cluster v1.0.0 delivers a modern developer experience rivaling Rust, Go, and Python, implemented with **zero external dependencies** and pure native execution speed.
+
+This chapter details the primary developer tools:
+1. **Interactive REPL (`cl repl`)**: Instant prototyping and statement evaluation.
+2. **Built-in Package Manager (`cl pkg`, `cl add`, `cl search`)**: Accessing the 550,000+ module ecosystem.
+3. **Language Server Protocol (`cl lsp`)**: Editor autocompletion, hover docs, and diagnostics.
+4. **Native Test Suite Runner (`cl test`)**: Millisecond test orchestration.
+5. **Interactive WebAssembly Playground**: Running Cluster in the browser.
+6. **Continuous Integration Action (`setup-cluster@v1`)**: Automating CI/CD pipelines.
+
+---
+
+## 1. Interactive REPL (`cl repl`)
+
+The Cluster REPL allows developers to experiment with algorithms, inspect data models, and verify string interpolations without writing files to disk.
+
+```bash
+cl repl
+```
+
+```text
+==================================================================
+    Cluster Language v1.0.0 Interactive REPL (Zero Python)
+    Type :help for commands, :exit or Ctrl+D to quit.
+==================================================================
+
+cluster> x := 10 + 32
+cluster> put("Answer: " + to_text(x))
+Answer: 42
+cluster> name := "Cluster"
+cluster> put("Hello from %{name}!")
+Hello from Cluster!
+cluster> :exit
+```
+
+### REPL Commands:
+- `:help` / `:h`: Display help.
+- `:clear` / `:c`: Reset accumulated statements and memory.
+- `:list` / `:l`: Display active session history.
+- `:exit` / `:q`: Terminate REPL session.
+
+---
+
+## 2. Native Package Manager (`cl pkg`, `cl add`, `cl search`)
+
+Cluster indexes more than **550,000 pure native modules** across 110 organization volumes.
+
+### Searching Modules:
+```bash
+cl search adler
+cl search cipher
+cl search crypto
+```
+
+### Adding a Package to Your Project:
+```bash
+cl add cl-adler32
+```
+This automatically:
+1. Fetches and installs the module into `./deps/cl-adler32/`.
+2. Registers `cl-adler32 = "0.1.0"` in `cl.toml`.
+3. Makes `import "cl-adler32"` available immediately.
+
+### Inspecting Installed Dependencies:
+```bash
+cl list
+```
+
+---
+
+## 3. Language Server Protocol (`cl lsp`)
+
+The native driver includes a JSON-RPC 2.0 language server providing IDE intelligence:
+- **Hover Documentation**: Function signatures, module details.
+- **Completion Provider**: Real-time keywords (`fn`, `model`, `vector`, `while`) and built-in routines (`put`, `file_read`, `list_push`).
+- **Definition Provider**: Jump directly to function or struct definitions.
+
+Start the LSP server directly or configure it in VS Code:
+```bash
+cl lsp
+```
+
+---
+
+## 4. Native Test Suite Runner (`cl test`)
+
+Cluster discovers and executes all test suites recursively:
+```bash
+cl test
+cl test tests/concurrency
+```
+Execution timings are measured at millisecond latency:
+```text
+  ✓ [PASS] tests/concurrency/test_channel_fan_in.zk (55ms)
+  ✓ [PASS] tests/concurrency/test_channel_fan_out.zk (51ms)
+  ✓ [PASS] tests/concurrency/test_channel_ping_pong.zk (59ms)
+  ✓ [PASS] tests/concurrency/test_spawn_parallel_sum.zk (50ms)
+------------------------------------------------------------------
+ Test Summary: 4 passed, 0 failed (216ms total)
+```
+
+---
+
+## 5. WebAssembly Browser Playground
+
+Cluster compiles directly to `wasm32-wasi` and web targets. The interactive playground (`docs/playground/index.html`) enables users to write, compile, and run Cluster in their browser with instant terminal output.
+
+---
+
+## 6. Official GitHub Action (`cluster-lang/setup-cluster@v1`)
+
+Integrate Cluster verification into GitHub Actions CI workflows:
+
+```yaml
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cluster-lang/setup-cluster@v1
+        with:
+          version: '1.0.0'
+      - run: cl test
+```

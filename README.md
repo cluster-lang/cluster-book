@@ -45,7 +45,74 @@ The book covers everything from fundamental syntax to deep compiler internals an
 - **Chapter 33: Multi-Target Cross-Compilation & Hardware Backends** — `cl targets` hardware matrix, WebAssembly (`wasm32-wasi`), bare-metal microcontrollers (`arm-none-eabi`), and ThreadSanitizer (`--tsan`).
 - **Chapter 34: Standard Document, Data & Physics Wire Formats** — The unified wire modules: Document AST (`std/cld`), binary bundles (`std/clb`), schema contracts (`std/cls`), and 3D spatial voxel physics (`std/clw`).
 - **Chapter 35: Pure Cryptography, Hashing & Wire Security** — RFC 3174 SHA-1, FNV-1a, DJB2, and RFC 4648 Base64 streaming implemented in 100% pure Cluster with zero external C libraries.
-- **Chapter 36: Error Handling, Result Monads & Robust Panics** — Algebraic `Result[T, E]`, syntactic fallback operators (`?:`, `??`, `??=`, `?.`), and fail-closed assertion contracts.
+- **Chapter 36: Ecosystem Tooling, 550K Module Registry, REPL, LSP & Playground** — Interactive REPL (`cl repl`), native package manager (`cl add`/`cl search`), JSON-RPC LSP daemon (`cl lsp`), test suite runner (`cl test`), in-browser playground, and CI/CD GitHub Action (`setup-cluster@v1`).
+
+---
+
+## 🛠️ Complete Developer Workflow & Tooling Guide
+
+Cluster includes an all-in-one developer toolchain engineered with zero Python dependencies:
+
+### 1. Interactive REPL (`cl repl`)
+Test expressions, verify syntax, and prototype interactively:
+```bash
+cl repl
+```
+Commands inside the REPL:
+- `:help`: View instructions
+- `:clear`: Reset accumulated session state
+- `:list`: Display history of active statements
+- `:exit`: Quit REPL
+
+### 2. Built-in Package Manager (`cl pkg`, `cl add`, `cl search`)
+Query and install dependencies from the 550,000+ module ecosystem:
+```bash
+# Search registry by keyword
+cl search adler
+
+# Add package directly into ./deps/ and record in cl.toml
+cl add cl-adler32
+
+# List project dependencies
+cl list
+
+# Restore all dependencies from cl.toml
+cl install
+```
+
+### 3. Native Test Suite Runner (`cl test`)
+Execute automated test files (`test_*.cl` and `test_*.zk`) with millisecond precision:
+```bash
+# Run all tests in project
+cl test
+
+# Run specific test folder
+cl test tests/concurrency
+```
+
+### 4. Language Server Protocol (`cl lsp`)
+Start the native JSON-RPC LSP daemon for editor autocompletion, hover docs, and definition jumps:
+```bash
+cl lsp
+```
+
+### 5. DWARF Debug Symbols for VS Code F5 Debugging
+Compile binaries with full DWARF line tables for GDB, LLDB, and VS Code debugger breakpoints:
+```bash
+cl build src/main.cl -g -o app
+```
+
+### 6. Interactive WebAssembly Playground
+Run Cluster directly in your web browser with zero installation:
+* Open `docs/playground/index.html` to write, compile, and execute code in real-time.
+
+### 7. Official GitHub Actions CI Integration
+Add Cluster compilation and automated testing to any GitHub repository:
+```yaml
+- uses: cluster-lang/setup-cluster@v1
+  with:
+    version: '1.0.0'
+```
 
 ---
 
