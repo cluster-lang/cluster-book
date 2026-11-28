@@ -16,7 +16,7 @@ description: Learn Cluster-lang from the ground up. A high-performance systems l
 
 <hr>
 
-<h2>All 32 Official Chapters</h2>
+<h2>All 37 Official Chapters</h2>
 
 <h1>The Cluster Book</h1>
 <p>The official documentation and language guide for <strong>Cluster-lang</strong> — a high-performance systems language with Pythonic readability, C++ execution speed, and compile-time memory safety.</p>
@@ -153,5 +153,25 @@ description: Learn Cluster-lang from the ground up. A high-performance systems l
     <a class="chapter-card" href="chapter32.html">
         <div class="card-num">Chapter 32</div>
         <div class="card-title">Zero-Training AI Model Weight Surgery (SafeTensors & GGUF)</div>
+    </a>
+    <a class="chapter-card" href="chapter33.html">
+        <div class="card-num">Chapter 33</div>
+        <div class="card-title">Multi-Target Cross-Compilation & Hardware Backends</div>
+    </a>
+    <a class="chapter-card" href="chapter34.html">
+        <div class="card-num">Chapter 34</div>
+        <div class="card-title">Standard Document, Data & Physics Wire Formats</div>
+    </a>
+    <a class="chapter-card" href="chapter35.html">
+        <div class="card-num">Chapter 35</div>
+        <div class="card-title">Pure Cryptography, Hashing & Wire Security</div>
+    </a>
+    <a class="chapter-card" href="chapter36.html">
+        <div class="card-num">Chapter 36</div>
+        <div class="card-title">Ecosystem Tooling, 550K Module Registry, REPL, LSP & Playground</div>
+    </a>
+    <a class="chapter-card" href="chapter37.html">
+        <div class="card-num">Chapter 37</div>
+        <div class="card-title">Cluster Sandbox Micro-OS, Safe Bounds & Production Stdlib</div>
     </a>
 </div>

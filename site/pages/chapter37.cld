@@ -1,0 +1,91 @@
+title: Chapter 37: Cluster Sandbox Micro-OS, Memory Bounds Safety & Production Stdlib
+author: mohammadzaid/(cluster) <zkalamgir@proton.me>
+date: 2026-11-28
+layout: chapter
+tags: cluster,sandbox,micro-os,safety,epoll,sqlite,tls,stdlib
+===
+
+# Chapter 37: Cluster Sandbox Micro-OS, Memory Bounds Safety & Production Stdlib
+
+Cluster extends systems programming and isolated execution with **Cluster Sandbox** (`cl sandbox`), hardware-isolated bare-metal micro-OS execution, compile-time checked vector bounds safety (`--safe-bounds`), non-blocking `epoll` + parameterized SQLite3 + OpenSSL TLS runtime primitives, and eight new zero-dependency pure-Cluster standard library modules (`std/`).
+
+---
+
+## 1. Cluster Sandbox Micro-OS (`cl sandbox`)
+
+`cl sandbox` compiles any `.cl` program targeting `--target x86_64-sandbox` directly into a compact **14 KB–24 KB freestanding x86-64 Multiboot 1 ELF kernel** (`clsandbox_boot.S` + `clsandbox_rt.c`) and boots it inside QEMU in isolated Ring 0 with zero host filesystem or network access.
+
+```bash
+# Compile a Cluster program to a standalone micro-OS kernel ELF
+cl sandbox build app.cl -o app.sandbox.elf
+
+# Compile with runtime vector bounds checks enforced inside the sandbox
+cl sandbox build app.cl --safe-bounds -o app.sandbox.elf
+
+# Boot and run directly in hardware-isolated QEMU
+cl sandbox run app.cl --mem 128M --timeout 10
+```
+
+### Real-World Workloads Supported Inside Cluster Sandbox
+- **Untrusted Parser & Data Validators:** Isolate JSON, YAML, binary protocol, or x86-64 instruction decoding (`std/json.cl`, `std/yaml.cl`, `std/x86_disasm.cl`) inside a disposable micro-VM.
+- **Untrusted Plugin / Sandbox Code Execution:** Compile and run user-submitted `.cl` programs with fixed `--mem` ceilings and `--timeout` watchdogs, capturing clean COM1 serial output and deterministic VM exit codes (`[cl-sandbox] exit=0`).
+- **Air-Gapped Cryptography & Numerical Compute:** Execute `std/crypto.cl` (`SHA-256`, `HMAC-SHA256`, `ChaCha20-Poly1305`, `X25519`), matrix math, quantization, and image encoding offline with zero host OS syscalls.
+- **Fail-Closed Host Isolation:** Inside the bare-metal Cluster Micro-OS runtime, `file_read`, `file_write`, `net_listen`, `net_connect`, `net_tls_connect`, `cl_sqlite_open`, and `system` return fail-closed errors so untrusted workloads cannot access host disks, sockets, or processes.
+
+---
+
+## 2. Deterministic Vector Bounds Safety (`--safe-bounds`) & Explicit Freeing
+
+Compile any binary or sandbox kernel with `--safe-bounds` to enforce runtime bounds checking on every vector index load:
+
+```bash
+cl build app.cl --safe-bounds -O3 -o app
+```
+
+Out-of-bounds indexing aborts safely with `[cluster] panic: vector index out of bounds` and exit code `134` instead of corrupting memory. Long-running daemons and build tools (such as Cluster SSG) can also explicitly reclaim hot containers with `list_free(vec)` and `dict_free(dict)` and avoid redundant empty container allocations inside `Model(...)` constructors.
+
+---
+
+## 3. Asynchronous I/O (`epoll`), OpenSSL TLS & Parameterized SQLite3
+
+The Cluster POSIX runtime (`libcluster_rt.so` / `concurrency.o`) provides high-concurrency networking and database safety natively:
+
+```cluster
+import "std/net.cl"
+import "std/http.cl"
+import "std/sql.cl"
+import "std/tls.cl"
+
+fn main():
+    ep := epoll_new()
+    db := sqlite_open(":memory:")
+    sqlite_exec(db, "CREATE TABLE users(name TEXT)")
+    sqlite_exec_param(db, "INSERT INTO users(name) VALUES (?)", "Alice'; DROP TABLE users;--")
+    rows := sqlite_query_json(db, "SELECT name FROM users")
+    print(rows)
+    sqlite_close(db)
+```
+
+---
+
+## 4. Production Developer Tooling (`cl fmt`, `cl lsp`)
+
+- **`cl fmt <file.cl>`**: Normalizes indentation (tabs to 4 spaces), strips trailing whitespace, and enforces consistent EOF formatting.
+- **`cl lsp`**: Runs a persistent JSON-RPC 2.0 language server supporting `initialize`, real compiler-backed `textDocument/publishDiagnostics` on `didOpen`/`didChange`, `documentSymbol`, `hover`, `completion`, `shutdown`, and `exit`.
+
+---
+
+## 5. Pure-Cluster Standard Library Modules (`std/`)
+
+Cluster adds eight zero-dependency `.cl` modules so tooling, AI pipelines, binary packers, and verification harnesses run natively without external Python or C dependencies:
+
+| Module | Capabilities |
+| :--- | :--- |
+| `std/sysutil.cl` | POSIX `getenv`, `getcwd`, `clock_gettime`, `usleep`, `popen`, file descriptors, `mkdir -p`, CLI arg parser |
+| `std/binpack.cl` | Endian-aware binary buffers + IEEE-754 `f16`/`bf16`/`f32`/`f64` bit codecs & hex helpers |
+| `std/x86_disasm.cl` | Pure-Cluster x86-64 instruction decoder & safe live-patch static validator |
+| `std/gguf.cl` | GGUF v2/v3 metadata KV & tensor layout reader (`F32`/`F16`/`Q4_K`/`Q6_K`/`Q8_0`) |
+| `std/tfevents.cl` | Native TensorBoard `.tfevents.` protobuf + Castagnoli CRC32C event writer |
+| `std/image.cl` | Netpbm PPM (`P6`) decoder & lossless RGB PNG encoder (CRC32 + Adler-32) |
+| `std/yaml.cl` | Pure-Cluster YAML key-value, nested mapping & list parser |
+| `std/ndarray.cl` | Float arrays, PRNG, RMSNorm, SiLU, softmax, Q8_0 quantization & cosine LR schedules |

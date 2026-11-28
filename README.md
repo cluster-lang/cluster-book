@@ -46,6 +46,7 @@ The book covers everything from fundamental syntax to deep compiler internals an
 - **Chapter 34: Standard Document, Data & Physics Wire Formats** — The unified wire modules: Document AST (`std/cld`), binary bundles (`std/clb`), schema contracts (`std/cls`), and 3D spatial voxel physics (`std/clw`).
 - **Chapter 35: Pure Cryptography, Hashing & Wire Security** — RFC 3174 SHA-1, FNV-1a, DJB2, and RFC 4648 Base64 streaming implemented in 100% pure Cluster with zero external C libraries.
 - **Chapter 36: Ecosystem Tooling, 550K Module Registry, REPL, LSP & Playground** — Interactive REPL (`cl repl`), native package manager (`cl add`/`cl search`), JSON-RPC LSP daemon (`cl lsp`), test suite runner (`cl test`), in-browser playground, and CI/CD GitHub Action (`setup-cluster@v1`).
+- **Chapter 37: Cluster Sandbox Micro-OS, Safe Bounds & Production Stdlib** — Bare-metal Multiboot micro-OS isolation (`cl sandbox build`/`run`), vector bounds checking (`--safe-bounds`), `epoll`/TLS/SQLite3 runtime primitives, `cl fmt`, and zero-dependency `std/` modules (`sysutil`, `binpack`, `x86_disasm`, `gguf`, `tfevents`, `image`, `yaml`, `ndarray`).
 
 ---
 
